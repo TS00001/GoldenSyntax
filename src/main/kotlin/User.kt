@@ -8,11 +8,14 @@ class User {
     var geburtsdatum: LocalDate? = null
     var guthaben:  Double = 0.0
 
+
     companion object {
         val users = mutableListOf<User>()
     }
 
-    fun aufladen(amount: Double) {
+    fun aufladen() {
+        println("Wieviel Euro möchten Sie aufladen?")
+        var amount = readln().toDouble()
         guthaben += amount
         println("✓ Guthaben erfolgreich um $amount Euro aufgeladen. Neues Guthaben: $guthaben Euro")
     }
@@ -63,6 +66,13 @@ class User {
 
     }
 
-
+    fun printUser(){
+        println("""
+            👤 USERPROFIL
+            Username: ${this.username}
+            E-Mail: ${this.email}
+            Guthaben: ${this.guthaben}     
+        """.trimIndent())
+    }
 }
 

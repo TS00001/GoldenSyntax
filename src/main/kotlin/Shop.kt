@@ -20,4 +20,17 @@ class Shop {
                  """.trimIndent())
         }
     }
+
+    fun displayAllProducts(products: List<Produkt>) {
+        println("Gesamtes Sortiment:")
+        products.forEach {
+            when (it) {
+                is Waschmaschiene -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
+                is Smartphone -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
+                is Schuh -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
+            }
+        }
+    }
+
+
 }

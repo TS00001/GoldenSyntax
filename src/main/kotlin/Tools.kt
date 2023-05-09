@@ -34,3 +34,10 @@ fun partingLine() {
 fun sleep(i: Long) {
     Thread.sleep(i)
 }
+fun welcome(){
+    println("Herzlich willkommen bei Golden Syntax")
+    sleep(1000)
+    println("Bevor Sie bei uns einkaufen können müssen Sie sich Registrieren.")
+    sleep(1000)
+    println("Möchten Sie sich jetzt registrieren? (JA/NEIN)")
+}
