@@ -37,10 +37,8 @@ val alleProdukte = listOf(
 var user = User("Tom", "info@tom.de", "123", LocalDate.of(1986,3,10), 1000.0)
 fun main(){
     welcome()
-
 }
 
-// TODO: FUNKTIONEN
 
 
 

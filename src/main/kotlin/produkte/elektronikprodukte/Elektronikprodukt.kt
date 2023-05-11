@@ -2,7 +2,8 @@ package produkte.elektronikprodukte
 
 import produkte.Produkt
 
-open class Elektronikprodukt(name: String, preis: Double, rezension: String, garantie: Boolean) : Produkt(name, preis, rezension) {
+open class Elektronikprodukt(name: String, preis: Double, rezension: String, garantie: Boolean) : Produkt(name, preis, rezension,
+) {
 
 
     open fun garantie(preis: Double, garantie: Boolean){

@@ -6,39 +6,8 @@ import java.lang.IndexOutOfBoundsException
 import java.lang.NumberFormatException
 import java.util.*
 
-//Diese Funktion berechnet den Preis der garantie (5% vom produktpreis)
-fun garantie(preis: Double, garantie: Boolean) {
-    if (garantie) {
-        var garantiePreis = preis * 5 / 100
-        var preisInklGarantie = preis * 1.05
-        println(
-            """
-            Die garantie für das produkte.Produkt Kostet $garantiePreis€
-            Das produkte.Produkt inklusive Garantie Kostet $preisInklGarantie€
-            """.trimIndent()
-        )
-    } else {
-        println(
-            """
-            Sie haben sich dafür entschieden keine Garantie zu buchen.
-            Das produkte.Produkt wurde zu Ihrem Wahrenkorb hinzugefügt $preis€
-            """.trimIndent()
-        )
-    }
-}
-
-fun randomBoolean(): Boolean {
-    val random = Random()
-    return random.nextBoolean()
-}
-
-fun partingLine() {
-    println("-_-_-_-_-_-_-_-_-_-_-")
-}
-
-fun sleep(i: Long) {
-    Thread.sleep(i)
-}
+//WILLKOMEN
+    //startet die app
 fun welcome(){
     println("Herzlich willkommen bei Golden Syntax")
     sleep(1000)
@@ -48,15 +17,50 @@ fun welcome(){
     sleep(500)
 }
 
-
-
+//Gibt einen random Boolean zurück
+fun randomBoolean(): Boolean {
+    val random = Random()
+    return random.nextBoolean()
+}
 
 //MENÜS
+    //Landingpage Menü
+fun loginOderRegistrieren() {
+    var auswahl: Int
+    var loggedIn = false
+    do {
+        println("1. Login")
+        println("2. Registrieren")
+        println("3. Programm beenden")
+        print("Auswahl: ")
+        try {
+            auswahl = readln().toInt()
+        } catch (ex: Exception) {
+            auswahl = 0
+        }
+        when (auswahl) {
+            1 ->{
+                loggedIn = user.userLogin()
+                if (loggedIn == true){
+                    auswahl = 3
+                }
+            }
+            2 -> user.register()
+            3 -> println("Programm wird beendet...")
+            else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
+        }
+    } while (auswahl != 3)
+    if (loggedIn == true){
+        hauptmenue()
+    }
+}
+
+    //Hauptmenü
 fun hauptmenue() {
     var auswahl: Int
     do {
         println("Was möchten Sie tun?")
-        partingLine()
+        println()
         println("1. Profil anzeigen")
         println("2. Guthaben aufladen")
         println("3. Sortiment anzeigen")
@@ -66,7 +70,7 @@ fun hauptmenue() {
         println("7. Produkte kaufen")
         println("8. Warenkorb anzeigen")
         println("9. Bezahlen")
-        println("10. Programm beenden")
+        println("10. Logout")
         print("Auswahl: ")
         try {
             auswahl = readln().toInt()
@@ -92,68 +96,10 @@ fun hauptmenue() {
         }
     } while (auswahl != 10)
 }
-fun loginOderRegistrieren() {
-    var auswahl: Int
-    var loggedIn = false
-    do {
-        println("1. Login")
-        println("2. Registrieren")
-        println("3. Programm beenden")
-        print("Auswahl: ")
-        try {
-            auswahl = readln().toInt()
-        } catch (ex: Exception) {
-            auswahl = 0
-        }
-        when (auswahl) {
-            1 ->{
-                loggedIn = user.login()
-                if (loggedIn == true){
-                    auswahl = 3
-                }
-            }
-            2 -> user.register()
-            3 -> println("Programm wird beendet...")
-            else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
-        }
-    } while (auswahl != 3)
-    if (loggedIn == true){
-        hauptmenue()
-    }
-}
-
-fun loginOderRegistrieren1() {
-    var auswahl: Int
-    var loggedIn = false
-    do {
-        println("1. Login")
-        println("2. Registrieren")
-        println("3. Programm beenden")
-        print("Auswahl: ")
-        try {
-            auswahl = readln().toInt()
-        } catch (ex: Exception) {
-            auswahl = 0
-        }
-        when (auswahl) {
-            1 ->{
-                loggedIn = user.login()
-                if (loggedIn == true){
-                    auswahl = 3
-                }
-            }
-            2 -> user.register()
-            3 -> println("Programm wird beendet...")
-            else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
-        }
-    } while (auswahl != 3)
-    if (loggedIn == true){
-        hauptmenue()
-    }
-}
 
 
 //SORTIERFUNKTIONEN
+    //sortiert nach Alphabet
 fun sortiertNachNamen(){
     println("Alle Produkte sortiert nach Namen:")
     val sortiertNachNamen = alleProdukte.sortedBy { it.name }
@@ -161,6 +107,7 @@ fun sortiertNachNamen(){
         println("- ${it.name}: ${it.preis}€")
     }
 }
+    //Sortiert nach Preis
 fun sortiertNachPreis(){
     println("Alle Produkte sortiert nach Preis:")
     val sortiertNachPreis = alleProdukte.sortedBy { it.preis }
@@ -169,7 +116,9 @@ fun sortiertNachPreis(){
     }
 }
 
+
 //FILTERFUNKTIONEN
+    //zeigt alle Waschmaschinen
 fun filterWaschmaschine(){
     val waschmaschinen = alleProdukte.filterIsInstance<Waschmaschiene>()
     println("WASCHMASCHINEN:")
@@ -181,6 +130,7 @@ fun filterWaschmaschine(){
     }
 
 }
+    //Zeigt alle Smartphones
 fun filterSmartphones(){
     val smartphone = alleProdukte.filterIsInstance<Smartphone>()
     println("SMARTPHONES:")
@@ -192,6 +142,8 @@ fun filterSmartphones(){
     }
 
 }
+
+    //Zeigt alle Schuhe
 fun filterSchuhe(){
     val schuh = alleProdukte.filterIsInstance<Schuh>()
     println("SCHUHE:")
@@ -204,6 +156,8 @@ fun filterSchuhe(){
 
 }
 
+
+    //Diese Funktion zeigt mir eine Liste mit allen Produkten an, die zum kauf zur verfügung stehen an.
 fun produktKaufen(){
     var erfolg: Boolean = false
     while (!erfolg) {
@@ -226,4 +180,37 @@ fun produktKaufen(){
         }
     }
     println("Möchten Sie weiter einkaufen?")
+}
+
+    //Diese Funktion berechnet den Preis der garantie (5% vom produktpreis)
+    //Leider konnte ich diese funktion noch nicht richtig in meine Main einbauen.
+fun garantie(preis: Double, garantie: Boolean) {
+    if (garantie) {
+        var garantiePreis = preis * 5 / 100
+        var preisInklGarantie = preis * 1.05
+        println(
+            """
+            Die garantie für das produkte.Produkt Kostet $garantiePreis€
+            Das produkte.Produkt inklusive Garantie Kostet $preisInklGarantie€
+            """.trimIndent()
+        )
+    } else {
+        println(
+            """
+            Sie haben sich dafür entschieden keine Garantie zu buchen.
+            Das produkte.Produkt wurde zu Ihrem Wahrenkorb hinzugefügt $preis€
+            """.trimIndent()
+        )
+    }
+}
+
+
+    //Trenner
+fun partingLine() {
+    println("-_-_-_-_-_-_-_-_-_-_-")
+}
+
+    //Sleep mit parameter bei der ich die dauer in Millisekunden eingeben kann
+fun sleep(i: Long) {
+    Thread.sleep(i)
 }

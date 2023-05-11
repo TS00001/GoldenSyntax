@@ -1,9 +1,7 @@
 package shop
 
-import java.util.*
 import java.time.LocalDate
 import java.time.Period
-import java.time.format.DateTimeFormatter
 
 open class User(
     var username: String,
@@ -57,17 +55,7 @@ open class User(
         return true
     }
 
-    fun showUsers() {
-        if (users.isNotEmpty()) {
-            println("Liste aller registrierten Benutzer:")
-            for (user in users) {
-                println("👤 Benutzername: ${user.username}, E-Mail: ${user.email}, Guthaben:${user.guthaben}€")
-            }
-        } else {
-            println("Es sind keine Benutzer registriert.")
-        }
 
-    }
 
     fun printUser() {
         println(
@@ -80,7 +68,7 @@ open class User(
         )
     }
 
-    fun login(): Boolean {
+    fun userLogin(): Boolean {
         var versuche = 0
         while (versuche < 3) {
             println("Bitte geben Sie ihren Benutzernamen ein:")
@@ -91,7 +79,7 @@ open class User(
 
             if (inputUsername == username && inputPasswort == password) {
                 println("""
-                    Erfolgreich eingelogt.
+                    ✓ Erfolgreich eingelogt.
                     
                     """.trimIndent())
 
@@ -103,6 +91,20 @@ open class User(
         }
         println("maximum an versuchen erreicht, login fehlgeschlagen.")
         return false
+    }
+
+
+//Überflüssige funktionen
+    fun showUsers() {
+        if (users.isNotEmpty()) {
+            println("Liste aller registrierten Benutzer:")
+            for (user in users) {
+                println("👤 Benutzername: ${user.username}, E-Mail: ${user.email}, Guthaben:${user.guthaben}€")
+            }
+        } else {
+            println("Es sind keine Benutzer registriert.")
+        }
+
     }
 }
 
