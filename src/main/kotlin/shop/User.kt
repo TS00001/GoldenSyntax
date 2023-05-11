@@ -90,7 +90,11 @@ open class User(
             val inputPasswort = readln()
 
             if (inputUsername == username && inputPasswort == password) {
-                println("Erfolgreich eingelogt.")
+                println("""
+                    Erfolgreich eingelogt.
+                    
+                    """.trimIndent())
+
                 return true
             } else {
                 versuche++

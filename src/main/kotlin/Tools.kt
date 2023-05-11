@@ -2,6 +2,8 @@ import produkte.elektronikprodukte.Smartphone
 import produkte.elektronikprodukte.Waschmaschiene
 import produkte.kleidung.Schuh
 import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
+import java.lang.NumberFormatException
 import java.util.*
 
 //Diese Funktion berechnet den Preis der garantie (5% vom produktpreis)
@@ -37,22 +39,24 @@ fun partingLine() {
 fun sleep(i: Long) {
     Thread.sleep(i)
 }
-
-
-
 fun welcome(){
     println("Herzlich willkommen bei Golden Syntax")
     sleep(1000)
     println("Bevor Sie bei uns einkaufen können müssen Sie sich Registrieren oder einloggen.")
     sleep(1000)
     loginOderRegistrieren()
+    sleep(500)
 }
 
-// TODO: AUSWAHLMEÜS
+
+
+
+//MENÜS
 fun hauptmenue() {
     var auswahl: Int
     do {
         println("Was möchten Sie tun?")
+        partingLine()
         println("1. Profil anzeigen")
         println("2. Guthaben aufladen")
         println("3. Sortiment anzeigen")
@@ -60,7 +64,9 @@ fun hauptmenue() {
         println("5. Produkte alphabetisch sortieren")
         println("6. Produkte nach Klasse filtern")
         println("7. Produkte kaufen")
-        println("8. Programm beenden")
+        println("8. Warenkorb anzeigen")
+        println("9. Bezahlen")
+        println("10. Programm beenden")
         print("Auswahl: ")
         try {
             auswahl = readln().toInt()
@@ -79,12 +85,13 @@ fun hauptmenue() {
                 filterWaschmaschine()
             }
             7 -> produktKaufen()
-            8 -> println("Programm wird beendet...")
+            8 -> warenkorb.warenkorbAnzeigen()
+            9 -> warenkorb.bezahlen(warenkorb.warenkorbSumme(), user.guthaben)
+            10 -> println("Programm wird beendet...")
             else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
         }
-    } while (auswahl != 8)
+    } while (auswahl != 10)
 }
-
 fun loginOderRegistrieren() {
     var auswahl: Int
     var loggedIn = false
@@ -114,6 +121,37 @@ fun loginOderRegistrieren() {
         hauptmenue()
     }
 }
+
+fun loginOderRegistrieren1() {
+    var auswahl: Int
+    var loggedIn = false
+    do {
+        println("1. Login")
+        println("2. Registrieren")
+        println("3. Programm beenden")
+        print("Auswahl: ")
+        try {
+            auswahl = readln().toInt()
+        } catch (ex: Exception) {
+            auswahl = 0
+        }
+        when (auswahl) {
+            1 ->{
+                loggedIn = user.login()
+                if (loggedIn == true){
+                    auswahl = 3
+                }
+            }
+            2 -> user.register()
+            3 -> println("Programm wird beendet...")
+            else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
+        }
+    } while (auswahl != 3)
+    if (loggedIn == true){
+        hauptmenue()
+    }
+}
+
 
 //SORTIERFUNKTIONEN
 fun sortiertNachNamen(){
@@ -164,4 +202,28 @@ fun filterSchuhe(){
             |""".trimMargin())
     }
 
+}
+
+fun produktKaufen(){
+    var erfolg: Boolean = false
+    while (!erfolg) {
+        println("Wählen Sie eines unserer Produkte:")
+        for (i in alleProdukte.indices){
+            println("Wählen Sie [$i] für ${alleProdukte[i]}")
+        }
+        try {
+            var eingabe: String = readln()
+            var index: Int = eingabe.toInt()
+            val gewaehltesProdukt = alleProdukte[index]
+            warenkorb.produktHinzu(gewaehltesProdukt)
+            erfolg = true
+        }catch (ex: Exception){
+            if (ex is NumberFormatException){
+                println("Sie müssen eine Zahl eingeben.")
+            }else if (ex is IndexOutOfBoundsException){
+                println("Die eingegebene Zahl mus zwischen 0 und ${alleProdukte.size-1} liegen.")
+            }
+        }
+    }
+    println("Möchten Sie weiter einkaufen?")
 }

@@ -7,10 +7,9 @@ class Warenkorb {
 
     fun produktHinzu(produkt: Produkt){
         items.add(produkt)
-        println("● ${produkt.name} wurde zum Warenkorb hinzugefügt")
+        println("✓ ${produkt.name} wurde zum Warenkorb hinzugefügt")
     }
 
-    // TODO: shop.Warenkorb wird nicht richtig angezeigt.
     fun warenkorbAnzeigen() {
         var summe = 0.0
         for (produkt in items){
@@ -31,9 +30,24 @@ class Warenkorb {
     }
 
 
-
+    fun warenkorbLeeren(){
+        items.clear()
+    }
 
     fun warenkorbSumme(): Double{
         return items.sumByDouble { it.preis }
+    }
+
+    fun bezahlen(sumWarenkorb: Double, guthaben: Double){
+        var guthabenNachKauf = guthaben - (sumWarenkorb)
+            if (guthabenNachKauf < 0){
+                println("Fehler: Nicht genügend Guthaben auf dem Konto.")
+
+            }else{
+                println("""Vielen dank für Ihren Einkauf, 
+                |Ihr guthaben beträgt nun $guthabenNachKauf€
+                |""".trimMargin())
+            }
+        warenkorbLeeren()
     }
 }

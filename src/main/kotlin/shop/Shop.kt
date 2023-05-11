@@ -1,14 +1,17 @@
 package shop
-
+import loginOderRegistrieren
 import produkte.Produkt
 import produkte.elektronikprodukte.Smartphone
 import produkte.elektronikprodukte.Waschmaschiene
 import produkte.kleidung.Schuh
+import sleep
 
 open class Shop {
     private val produkte = mutableListOf<Produkt>()
 
-    fun produktHinzu(produkt: Produkt){
+
+
+    fun produktInWarenkorb(produkt: Produkt){
         produkte.add(produkt)
         println("✓ ${produkt.name} wurde dem Warenkorb hinzugefügt.")
     }

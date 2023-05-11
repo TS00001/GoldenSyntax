@@ -21,12 +21,12 @@ fun main(){
     var nikeFree = Schuh("Nike Free", 140.00, "★★★", 40)
 
     val goldenSyntax = Shop()
-    goldenSyntax.produktHinzu(mieleWaschmaschiene)
-    goldenSyntax.produktHinzu(siemansWaschmaschiene)
-    goldenSyntax.produktHinzu(phillipsWaschmaschiene)
-    goldenSyntax.produktHinzu(iPhoneX)
-    goldenSyntax.produktHinzu(iPhone10)
-    goldenSyntax.produktHinzu(iPhone14Pro)
-    goldenSyntax.produktHinzu(iPhone14ProMax)
+    goldenSyntax.produktInWarenkorb(mieleWaschmaschiene)
+    goldenSyntax.produktInWarenkorb(siemansWaschmaschiene)
+    goldenSyntax.produktInWarenkorb(phillipsWaschmaschiene)
+    goldenSyntax.produktInWarenkorb(iPhoneX)
+    goldenSyntax.produktInWarenkorb(iPhone10)
+    goldenSyntax.produktInWarenkorb(iPhone14Pro)
+    goldenSyntax.produktInWarenkorb(iPhone14ProMax)
 
 }

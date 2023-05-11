@@ -34,10 +34,9 @@ val alleProdukte = listOf(
     iPhone14ProMax,
     nikeRun,
     nikeAirJordanOne)
-var user = User("Tom", "info@tom.de", "123456", LocalDate.of(1986,3,10), 1000.0)
+var user = User("Tom", "info@tom.de", "123", LocalDate.of(1986,3,10), 1000.0)
 fun main(){
     welcome()
-
 
 }
 
@@ -45,29 +44,7 @@ fun main(){
 
 
 
-fun produktKaufen(){
-    var erfolg: Boolean = false
-    while (!erfolg) {
-        println("Wählen Sie eines unserer Produkte:")
-        for (i in alleProdukte.indices){
-            println("Wählen Sie [$i] für ${alleProdukte[i]}")
-        }
-        try {
-            var eingabe: String = readln()
-            var index: Int = eingabe.toInt()
-            val gewaehltesProdukt = alleProdukte[index]
-            warenkorb.produktHinzu(gewaehltesProdukt)
-            erfolg = true
-        }catch (ex: Exception){
-            if (ex is NumberFormatException){
-                println("Sie müssen eine Zahl eingeben.")
-            }else if (ex is IndexOutOfBoundsException){
-                println("Die eingegebene Zahl mus zwischen 0 und ${alleProdukte.size-1} liegen.")
-            }
-        }
-    }
-    println("Möchten Sie weiter einkaufen?")
-}
+
 
 
 
