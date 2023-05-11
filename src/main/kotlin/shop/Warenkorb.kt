@@ -1,6 +1,7 @@
 package shop
 
 import produkte.Produkt
+import user
 
 class Warenkorb {
     private val items = mutableListOf<Produkt>()
@@ -30,20 +31,22 @@ class Warenkorb {
     }
 
 
-    fun warenkorbLeeren(){
+    private fun warenkorbLeeren(){
         items.clear()
     }
 
     fun warenkorbSumme(): Double{
-        return items.sumByDouble { it.preis }
+        return items.sumOf { it.preis }
     }
 
     fun bezahlen(sumWarenkorb: Double, guthaben: Double){
         var guthabenNachKauf = guthaben - (sumWarenkorb)
+
             if (guthabenNachKauf < 0){
                 println("Fehler: Nicht genügend Guthaben auf dem Konto.")
 
             }else{
+                user.guthaben = guthabenNachKauf
                 println("""Vielen dank für Ihren Einkauf, 
                 |Ihr guthaben beträgt nun $guthabenNachKauf€
                 |""".trimMargin())
