@@ -1,3 +1,7 @@
+package produkte.kleidung
+
+import produkte.Produkt
+
 open class Kleidung(name: String, preis: Double, rezension: String, groesse: Int) : Produkt(name, preis, rezension) {
 
     open fun groesseWaehlen(): Int? {

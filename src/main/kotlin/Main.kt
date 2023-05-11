@@ -1,114 +1,72 @@
+import produkte.elektronikprodukte.Smartphone
+import produkte.elektronikprodukte.Waschmaschiene
+import produkte.kleidung.Schuh
+import shop.Shop
+import shop.User
+import shop.Warenkorb
+import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
+import java.lang.NumberFormatException
+import java.time.LocalDate
+
 // WASCHMASCHIENEN
 var mieleWaschmaschiene = Waschmaschiene("Miele 800", 899.90, "★★★★★", randomBoolean(), randomBoolean())
 var siemansWaschmaschiene = Waschmaschiene("Siemens 3000", 499.00, "★★★★", randomBoolean(), randomBoolean())
-var phillipsWaschmaschiene = Waschmaschiene("Phillips 600", 750.00, "★★", randomBoolean(), randomBoolean())
+
 
 // SMARTPHONES
 var iPhone14Pro = Smartphone("iPhone 14 Pro", 1200.0, "★★★★★", randomBoolean())
 var iPhone14ProMax = Smartphone("iPhone 14 Pro Max", 1450.0, "★★★★★", randomBoolean())
 var iPhone10 = Smartphone("iPhone 10", 800.0, "★★★", randomBoolean())
-var iPhoneX = Smartphone("iPhone X", 700.0, "★★★", randomBoolean())
+
 
 // SCHUHE
 var nikeAirJordanOne = Schuh("Nike Air Jordan One", 220.00, "★★★★★", 40)
 var nikeRun = Schuh("Nike Run", 160.00, "★★★★", 40)
-var nikeFree = Schuh("Nike Free", 140.00, "★★★", 40)
 
+var warenkorb = Warenkorb()
 val goldenSyntax = Shop()
 val alleProdukte = listOf(
     mieleWaschmaschiene,
     siemansWaschmaschiene,
-    phillipsWaschmaschiene,
     iPhone10,
-    iPhoneX,
     iPhone14Pro,
     iPhone14ProMax,
-    nikeFree,
     nikeRun,
     nikeAirJordanOne)
+var user = User("Tom", "info@tom.de", "123456", LocalDate.of(1986,3,10), 1000.0)
 fun main(){
-
-    // WILLKOMEN
     welcome()
-    //USER REGISTRIERUNG
-    // TODO: try catch für falscheingabe einbauen
-    val antwort = readln().uppercase()
-    val user1 = User()
-    if (antwort.equals("JA", ignoreCase = true)) {
-        user1.register()
-    } else if (antwort.equals("NEIN", ignoreCase = true)) {
-        println("Registrierung abgebrochen.")
-    } else {
-        println("Falsche Eingabe. Bitte antworten Sie mit Ja oder Nein.")
-    }
-    //GUTHABEN AUFLADEN
-    user1.aufladen()
 
 
-    //ALLE PRODUKTE ANZEIGEN
-    goldenSyntax.displayAllProducts(alleProdukte)
-
-    println("Produkte nach Preis absteigend oder Alphabetisch sortiert anzeigen?")
-    sortiertNachPreis()
-    partingLine()
-    filterWaschmaschine()
-    partingLine()
-    filterSmartphones()
-    partingLine()
-    filterSchuhe()
 }
 
 // TODO: FUNKTIONEN
-//SORTIERFUNKTIONEN
-fun sortiertNachNamen(){
-    println("Alle Produkte sortiert nach Namen:")
-    val sortiertNachNamen = alleProdukte.sortedBy { it.name }
-    sortiertNachNamen.forEach{
-        println("- ${it.name}: ${it.preis}€")
-    }
-}
-fun sortiertNachPreis(){
-    println("Alle Produkte sortiert nach Preis:")
-    val sortiertNachPreis = alleProdukte.sortedBy { it.preis }
-    sortiertNachPreis.forEach{
-        println("- ${it.name}: ${it.preis}€")
-    }
-}
 
 
-//FILTERFUNKTIONEN
-fun filterWaschmaschine(){
-    val waschmaschinen = alleProdukte.filterIsInstance<Waschmaschiene>()
-    println("WASCHMASCHINEN:")
-    waschmaschinen.forEach {
-        println("""
-            |- ${it.name}: ${it.preis}€
-            |  Bewertung: ${it.rezension}
-            |""".trimMargin())
-    }
 
-}
-fun filterSmartphones(){
-    val smartphone = alleProdukte.filterIsInstance<Smartphone>()
-    println("SMARTPHONES:")
-    smartphone.forEach {
-        println("""
-            |- ${it.name}: ${it.preis}€
-            |  Bewertung: ${it.rezension}
-            |""".trimMargin())
+fun produktKaufen(){
+    var erfolg: Boolean = false
+    while (!erfolg) {
+        println("Wählen Sie eines unserer Produkte:")
+        for (i in alleProdukte.indices){
+            println("Wählen Sie [$i] für ${alleProdukte[i]}")
+        }
+        try {
+            var eingabe: String = readln()
+            var index: Int = eingabe.toInt()
+            val gewaehltesProdukt = alleProdukte[index]
+            warenkorb.produktHinzu(gewaehltesProdukt)
+            erfolg = true
+        }catch (ex: Exception){
+            if (ex is NumberFormatException){
+                println("Sie müssen eine Zahl eingeben.")
+            }else if (ex is IndexOutOfBoundsException){
+                println("Die eingegebene Zahl mus zwischen 0 und ${alleProdukte.size-1} liegen.")
+            }
+        }
     }
-
-}
-fun filterSchuhe(){
-    val schuh = alleProdukte.filterIsInstance<Schuh>()
-    println("SCHUHE:")
-    schuh.forEach {
-        println("""
-            |- ${it.name}: ${it.preis}€
-            |  Bewertung: ${it.rezension}
-            |""".trimMargin())
-    }
-
+    println("Möchten Sie weiter einkaufen?")
 }
 
 

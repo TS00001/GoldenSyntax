@@ -1,3 +1,5 @@
+package produkte.kleidung
+
 class Schuh(name: String, preis: Double, rezension: String, groesse: Int) : Kleidung(name, preis, rezension, groesse) {
 
     fun printProdukt() {

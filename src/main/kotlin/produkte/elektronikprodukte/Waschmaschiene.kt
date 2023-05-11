@@ -1,3 +1,5 @@
+package produkte.elektronikprodukte
+
 open class Waschmaschiene(name: String, preis: Double, rezension: String, garantie: Boolean, var install: Boolean) : Elektronikprodukt(name, preis, rezension,
     garantie){
 
@@ -19,12 +21,12 @@ open class Waschmaschiene(name: String, preis: Double, rezension: String, garant
             var setupPreis = 50
             var preisInklSetup = preis + 50
             println("""
-            Die Installation für Ihre Waschmaschiene Kostet $setupPreis€
-            Die Waschmaschiene Inkl. Installation Kostet $preisInklSetup€
+            Die Installation für Ihre produkte.elektronikprodukte.Waschmaschiene Kostet $setupPreis€
+            Die produkte.elektronikprodukte.Waschmaschiene Inkl. Installation Kostet $preisInklSetup€
             """.trimIndent())
         }else{
             println("""
-            Wir liefern Ihre Waschmaschiene innerhalb 3 Werktagen.
+            Wir liefern Ihre produkte.elektronikprodukte.Waschmaschiene innerhalb 3 Werktagen.
             """.trimIndent())
         }
     }

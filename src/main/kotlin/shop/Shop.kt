@@ -1,15 +1,22 @@
-class Shop {
+package shop
+
+import produkte.Produkt
+import produkte.elektronikprodukte.Smartphone
+import produkte.elektronikprodukte.Waschmaschiene
+import produkte.kleidung.Schuh
+
+open class Shop {
     private val produkte = mutableListOf<Produkt>()
 
     fun produktHinzu(produkt: Produkt){
         produkte.add(produkt)
-        println("✓ ${produkt.name} wurde dem Shop hinzugefügt.")
+        println("✓ ${produkt.name} wurde dem Warenkorb hinzugefügt.")
     }
 
     fun produkteAnzeigen(): List<Produkt>{
         return produkte.toList()
     }
-
+    //Zeigt ein produkt an.
     fun produktDeails(){
         println("Alle verfügbaren Produkte:")
         produkte.forEach{
@@ -21,6 +28,7 @@ class Shop {
         }
     }
 
+    // Zeigt alle Produkte an
     fun displayAllProducts(products: List<Produkt>) {
         println("Gesamtes Sortiment:")
         products.forEach {

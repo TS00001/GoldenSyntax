@@ -1,3 +1,5 @@
+package produkte
+
 open class Produkt(
     val name: String,
     val preis: Double,
@@ -13,5 +15,10 @@ open class Produkt(
 
     }
 
+    override fun toString(): String {
+        return """
+            $name: $preis€
+            """.trimIndent()
+    }
 
 }

@@ -1,3 +1,8 @@
+import produkte.elektronikprodukte.Smartphone
+import produkte.elektronikprodukte.Waschmaschiene
+import produkte.kleidung.Schuh
+import shop.Shop
+
 fun main(){
     // WASCHMASCHIENEN
     var mieleWaschmaschiene = Waschmaschiene("Miele 800", 899.90, "★★★★★", randomBoolean(), randomBoolean())
