@@ -59,8 +59,8 @@ fun loginOderRegistrieren() {
 fun hauptmenue() {
     var auswahl: Int
     do {
-        println("Was möchten Sie tun?")
-        println()
+        println("HAUPTMENÜ")
+        println("Bitte wähle 1-10 und bestätige mit enter:")
         println("1. Profil anzeigen")
         println("2. Guthaben aufladen")
         println("3. Sortiment anzeigen")
@@ -91,7 +91,7 @@ fun hauptmenue() {
             7 -> produktKaufen()
             8 -> warenkorb.warenkorbAnzeigen()
             9 -> warenkorb.bezahlen(warenkorb.warenkorbSumme(), user.guthaben)
-            10 -> println("Programm wird beendet...")
+            10 -> println("Sie sind jetzt ausgeloggt...")
             else -> println("Ungültige Eingabe, bitte wählen Sie erneut.")
         }
     } while (auswahl != 10)
@@ -101,18 +101,27 @@ fun hauptmenue() {
 //SORTIERFUNKTIONEN
     //sortiert nach Alphabet
 fun sortiertNachNamen(){
-    println("Alle Produkte sortiert nach Namen:")
+    println("↓ ALLE PRODUKTE ALPHABETISCH SORTIERT:")
     val sortiertNachNamen = alleProdukte.sortedBy { it.name }
     sortiertNachNamen.forEach{
-        println("- ${it.name}: ${it.preis}€")
+        println("""
+            • ${it.name} 
+              ${it.preis}€ Bewertung: ${it.rezension}
+                
+            """.trimIndent())
     }
 }
     //Sortiert nach Preis
 fun sortiertNachPreis(){
-    println("Alle Produkte sortiert nach Preis:")
+    println("↓ ALLE PRODUKTE SORTIERT NACH DEM PREIS:")
     val sortiertNachPreis = alleProdukte.sortedBy { it.preis }
     sortiertNachPreis.forEach{
-        println("- ${it.name}: ${it.preis}€")
+        println("""
+            • ${it.name} 
+              ${it.preis}€ Bewertung: ${it.rezension}
+                
+            """.trimIndent())
+
     }
 }
 
@@ -124,7 +133,7 @@ fun filterWaschmaschine(){
     println("WASCHMASCHINEN:")
     waschmaschinen.forEach {
         println("""
-            |- ${it.name}: ${it.preis}€
+            |• ${it.name}: ${it.preis}€
             |  Bewertung: ${it.rezension}
             |""".trimMargin())
     }
@@ -136,7 +145,7 @@ fun filterSmartphones(){
     println("SMARTPHONES:")
     smartphone.forEach {
         println("""
-            |- ${it.name}: ${it.preis}€
+            |• ${it.name}: ${it.preis}€
             |  Bewertung: ${it.rezension}
             |""".trimMargin())
     }
@@ -149,7 +158,7 @@ fun filterSchuhe(){
     println("SCHUHE:")
     schuh.forEach {
         println("""
-            |- ${it.name}: ${it.preis}€
+            |• ${it.name}: ${it.preis}€
             |  Bewertung: ${it.rezension}
             |""".trimMargin())
     }
@@ -161,7 +170,7 @@ fun filterSchuhe(){
 fun produktKaufen(){
     var erfolg: Boolean = false
     while (!erfolg) {
-        println("Wählen Sie eines unserer Produkte:")
+        println("WÄHLEN SIE EINES UNSERER PRODUKTE:")
         for (i in alleProdukte.indices){
             println("Wählen Sie [$i] für ${alleProdukte[i]}")
         }
@@ -179,7 +188,7 @@ fun produktKaufen(){
             }
         }
     }
-    println("Möchten Sie weiter einkaufen?")
+    println()
 }
 
     //Diese Funktion berechnet den Preis der garantie (5% vom produktpreis)

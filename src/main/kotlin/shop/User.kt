@@ -22,7 +22,14 @@ open class User(
         guthaben += amount
         println("✓ Guthaben erfolgreich um $amount Euro aufgeladen. Neues Guthaben: $guthaben Euro")
     }
-
+    //BESCHREIBUNG DER FUNKTION REGISTER:
+    //Geburtsdatum wird über die Konsole eingelesen (muss im richtigen Format eingegeben werden)
+    //Geburtsdatum wird am `.`gesplittet und in eine liste eingefügt
+    //Mit localDate.now() hole ich mir das aktuelle Datum
+    //Da LocalDate.of das amerikanische format nimmt (yyyy.dd.mm) muss ich den index entsprechen einsetzen
+    //wird in dayOfBirth vom datentyp localDat gespeichert
+    //In der variable diff wird die different zwischen dayOfBirth und today in Jahren abgespeichert
+    //danach wird geprüft ob der User mindestens 12 jahre alt ist.
     fun register(): Boolean {
         var diff = 0
         print("Bitte geben Sie Ihren Benutzernamen ein: ")
@@ -32,12 +39,16 @@ open class User(
         print("Bitte geben Sie Ihr Passwort ein: ")
         password = readln()
         print("Bitte geben Sie Ihr Geburtsdatum ein (Format: dd.MM.yyyy): ")
+
         val birthDateStr = readln()
+
         var splittedBirthday = birthDateStr.split('.')
         try {
             val today = LocalDate.now()
+
             val dayOfBirth =
                 LocalDate.of(splittedBirthday[2].toInt(), splittedBirthday[1].toInt(), splittedBirthday[0].toInt())
+
             diff = Period.between(dayOfBirth, today).years
         } catch (e: Exception) {
             null
@@ -60,10 +71,13 @@ open class User(
     fun printUser() {
         println(
             """
+            ----------------------
             👤 USERPROFIL
             Username: ${this.username}
             E-Mail: ${this.email}
-            Guthaben: ${this.guthaben}     
+            Guthaben: ${this.guthaben} 
+            ----------------------
+                
         """.trimIndent()
         )
     }
@@ -94,7 +108,7 @@ open class User(
     }
 
 
-//Überflüssige funktionen
+//Zeigt alle User an
     fun showUsers() {
         if (users.isNotEmpty()) {
             println("Liste aller registrierten Benutzer:")

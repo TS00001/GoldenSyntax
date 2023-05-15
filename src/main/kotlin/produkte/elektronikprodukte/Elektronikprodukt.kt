@@ -6,7 +6,7 @@ open class Elektronikprodukt(name: String, preis: Double, rezension: String, gar
 ) {
 
 
-    open fun garantie(preis: Double, garantie: Boolean){
+    open fun garantieverlaengerung(preis: Double, garantie: Boolean){
         if (garantie){
             var garantiePreis = preis * 5/100
             var preisInklGarantie = preis * 1.05

@@ -36,9 +36,21 @@ open class Shop {
         println("Gesamtes Sortiment:")
         products.forEach {
             when (it) {
-                is Waschmaschiene -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
-                is Smartphone -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
-                is Schuh -> println("- ${it.name} Bewertung: ${it.rezension} Preis: (${it.preis} Euro)")
+                is Waschmaschiene -> println("""
+                    • ${it.name} (Waschmaschine)
+                      Preis: ${it.preis} Euro Bewertung: ${it.rezension}
+                        
+                    """.trimIndent())
+                is Smartphone -> println("""
+                    • ${it.name} (Smartphone)
+                      Preis: ${it.preis} Euro Bewertung: ${it.rezension}
+                        
+                    """.trimIndent())
+                is Schuh -> println("""
+                    • ${it.name} (Schuh)
+                      Preis: ${it.preis} Euro Bewertung: ${it.rezension}
+                        
+                    """.trimIndent())
             }
         }
     }

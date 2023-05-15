@@ -5,8 +5,8 @@ open class Waschmaschiene(name: String, preis: Double, rezension: String, garant
 
 
 
-    override fun garantie(preis: Double, garantie: Boolean) {
-        super.garantie(preis, garantie)
+    override fun garantieverlaengerung(preis: Double, garantie: Boolean) {
+        super.garantieverlaengerung(preis, garantie)
     }
     fun printProdukt() {
         println("""
